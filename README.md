@@ -1,10 +1,12 @@
 # Vivo Box Extractor [ Under development ]
 
-A program to extract, digest, save, and visualize data from a **Vivo Box** network router.
+A project to extract, digest, save, and visualize data from a **Vivo Box** network router.
 
 ## Operation
 
-This program prints the router's internal variables and their content on startup, one per line, then it runs continuously, only printing variables when they are changed. After downloading the repository it can be executed with:
+This program runs continously, extracting and printing the internal variables from the router it is configured to connect to.
+
+On startup all variables available are printed and then variables will only be printed when they receive updates.
 
 ```
 node index.js
@@ -12,12 +14,25 @@ node index.js
 
 ## Arguments
 
+Here are the list of arguments that can be used to alter the behaviour of this program:
+
 ```
---only-status      Only extract status variables, disabling statistics
---only-statistics  Only extract statistics variables, disabling status
---debug            Prints execution logs to standard error pipe (stderr)
---skip-start       Disables printing of initial variables on start
---date             Adds the current date (in local time) to the beggining of the line
+--debug             Prints execution logs to the standard error pipe (stderr)
+--only-status       Only extract status variables, disabling statistics
+--only-statistics   Only extract statistics variables, disabling status
+--skip-start        Disables printing of all variables at start up
+--only-start        Prints all variables and exit the program
+--slow              Prints updates lazily and slows down when there are few updates
+--date              Adds the date string in local time to the output
+--time              Adds the time number of the updated variable
+--previous          Adds the previous value of the variable to the output
+--json              Changes the output format to JSON object lines separated by new lines
+--session-id <id>   Specifies a session id to use while connecting to the router
+--exclude <k>       Excludes one or more variables from the output (comma-separated list of case insensitive variable key prefixes)
+--include <k>       Excludes all variables not specified from the output
+--write <path>      Writes the output (not the logs) to a specified file.
+--write <folder>    Creates a file named with the current date at the specified folder and writes the output to it.
+--append <path>     Append the output (not the logs) to a specified file.
 ```
 
 ## Configuration
