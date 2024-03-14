@@ -1,15 +1,11 @@
 # Vivo Box Extractor [ Under development ]
 
-A project to extract, digest, save, and visualize data from a **Vivo Box** network router.
+A program to connect to a network router interface and extract, parse, process, filter and save data from it.
 
-## Operation
-
-This program runs continously, extracting and printing the internal variables from the router it is configured to connect to.
-
-On startup all variables available are printed and then variables will only be printed when they receive updates.
+The internal variables and their content are listed when the program starts, provided it is successful, it then continues to watch for changes and prints variables that were updated.
 
 ```
-node index.js
+node index.js [...args]
 ```
 
 ## Arguments
@@ -23,33 +19,35 @@ Here are the list of arguments that can be used to alter the behaviour of this p
 --skip-start        Disables printing of all variables at start up
 --only-start        Prints all variables and exit the program
 --slow              Prints updates lazily and slows down when there are few updates
---date              Adds the date string in local time to the output
+--no-date           Removes the date string in local time from the output
 --time              Adds the time number of the updated variable
+--type              Adds the update type ('created', 'updated', 'removed') to the output
 --previous          Adds the previous value of the variable to the output
 --json              Changes the output format to JSON object lines separated by new lines
 --session-id <id>   Specifies a session id to use while connecting to the router
---exclude <k>       Excludes one or more variables from the output (comma-separated list of case insensitive variable key prefixes)
---include <k>       Excludes all variables not specified from the output
---write <path>      Writes the output (not the logs) to a specified file.
---write <folder>    Creates a file named with the current date at the specified folder and writes the output to it.
---append <path>     Append the output (not the logs) to a specified file.
+--exclude <keys>    Excludes one or more variables from the outputprefixes
+--include <keys>    Excludes all variables not specified from the output
+           -> [keys] are prefixes of variable keys separated by comma, cas insensitive
+--write <file>      Writes the program output (except logs) to a specified file by its path
+--write <folder>    Creates a file named with the current date at the specified folder and writes the output to it
+--append <file>     Append the output to the end of a file, adding to it without rewriting it
 ```
 
 ## Configuration
 
-The program can be configured by an `.env` file or environment variables
+The program can be configured by creating an `.env` file on the project root or by setting environment variables.
 
-The variables used by this are listed at the [./lib/0-primitive/loadConfig.js](./lib/0-primitive/loadConfig.js) file
+It uses the `ROUTER_USERNAME` and `ROUTER_PASSWORD` to load credentials and optionally `ROUTER_HOST` to set the router host which by default is 192.168.15.1.
 
-## Output data
+## Output
 
 The internal router variables are printed one per line: Each line printed to the standard output starts with the variable name and an equal character (=) followed by the content of the variable in raw text. The program executes continuously, printing variables when they update.
 
 ## Dependencies
 
-This project is executed by [node.js](https://nodejs.org/) (tested on v20.10.0) and it must be installed for it to work.
+This project can be executed by using [node.js](https://nodejs.org/), it was tested on v20.10.
 
-It does not use npm packages at the moment. Running `npm install` is not necessary.
+There are no external packages required and `npm install` is not necessary.
 
 I developed this repository to work on the router of model *RTF3505VW-N2* when it uses the software of model *Vivo Box BR_SV_g000_R3505VWN1001_s42*, the interface dashboard it provides is this:
 
