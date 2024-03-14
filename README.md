@@ -13,9 +13,11 @@ node index.js
 ## Arguments
 
 ```
---debug        Logs verbose execution data to strerr
---skip-start   Skip the variables from the starting state
---date         Adds the current date (in local time) to the beggining of the line
+--only-status      Only extract status variables, disabling statistics
+--only-statistics  Only extract statistics variables, disabling status
+--debug            Prints execution logs to standard error pipe (stderr)
+--skip-start       Disables printing of initial variables on start
+--date             Adds the current date (in local time) to the beggining of the line
 ```
 
 ## Configuration

@@ -1,0 +1,9 @@
+data
+node_modules
+scripts/deploy.js
+log.txt
+child.log
+
+*.pid
+
+.env

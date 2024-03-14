@@ -1,0 +1,42 @@
+{
+  "name": "vivo-router-data-extractor",
+  "version": "0.1.0",
+  "description": "A project to extract, digest, save, and visualize data from a Vivo Box network router",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GuilhermeRossato/vivo-box-extractor.git"
+  },
+  "keywords": [
+    "router",
+    "extractor",
+    "network",
+    "extract",
+    "transform",
+    "load",
+    "visualize",
+    "vivo",
+    "vivo-box",
+    "vivo-router",
+    "data-engineering",
+    "data-processing",
+    "statistics",
+    "status",
+    "watch",
+    "watch-mode",
+    "data-analysis",
+    "data-visualization",
+    "etl",
+    "data",
+    "cli"
+  ],
+  "author": "Guilherme Rossato <guilhermrossato@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GuilhermeRossato/vivo-box-extractor/issues"
+  },
+  "homepage": "https://github.com/GuilhermeRossato/vivo-box-extractor#readme"
+}
