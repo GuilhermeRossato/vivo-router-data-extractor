@@ -11,13 +11,12 @@ const getUpdateListFromStateRecordPair = require('./lib/5-output/getUpdateListFr
 const outputAndApplyStateUpdateList = require('./lib/5-output/outputAndApplyStateUpdateList.js');
 const augmentStateWithPreviousStateRecord = require('./lib/3-parse/augmentStateWithPreviousStateRecord.js');
 const sleep = require('./lib/9-utils/sleep.js');
-const { isOnlyStatistics, isOnlyStatus } = require('./lib/0-primitive/args.js');
 const startExtractionLoop = require('./lib/4-loop/startExtractionLoop.js');
+const { isOnlyStatistics, isOnlyStatus, sessionArgIndex, isOnlyStart } = require('./lib/0-primitive/args.js');
 
 (async function init() {
     console.log('Started init function');
-    const sessionArgIndex = process.argv.indexOf(process.argv.find((a, i) => process.argv[i-1] === '--session' || process.argv[i-1] === '--id'))
-    let sessionId = await login(sessionArgIndex !== -1 ? process.argv[sessionArgIndex] : undefined);
+    let sessionId = await login(sessionArgIndex ? process.argv[sessionArgIndex] : undefined);
     console.log('Login sucessfull with session:', sessionId);
     const previousFetchTime = generatePreviousFetchTime(new Date().getTime() + 50);
     const processes = {
@@ -40,7 +39,7 @@ const startExtractionLoop = require('./lib/4-loop/startExtractionLoop.js');
         delete processes['status'];
     }
     for (const type in processes) {
-        console.log('Starting', type, 'extraction')
+        console.log('Starting', type, 'extraction');
         const response = await processes[type].extractor(sessionId);
         sessionId = response.sessionId;
         console.log('Loaded', response.body.length, 'bytes in', response.duration, 'ms');
@@ -60,7 +59,7 @@ const startExtractionLoop = require('./lib/4-loop/startExtractionLoop.js');
         processes[type].time  = response.time;
         await sleep(500);
     }
-    if (process.argv.includes('--only-start')) {
+    if (isOnlyStart) {
         return;
     }
     return await startExtractionLoop(
