@@ -1,16 +1,16 @@
 # Vivo Box Extractor [ Under development ]
 
-A program to connect to a network router interface and extract, parse, process, filter and save data from it.
-
-The internal variables and their content are listed when the program starts, provided it is successful, it then continues to watch for changes and prints variables that were updated.
+A program that connects to a network router interface, extracts and parses its internal state data, and serve it as a JSON event stream.
 
 ```
 node index.js [...args]
 ```
 
-## Arguments
+The program starts by extracting, parsing, and printing the current router state with all internal variables and their values. After this initial stage the program starts watching for updates and prints variables only when they are changed.
 
-Here are the list of arguments that can be used to alter the behaviour of this program:
+The output is a series of events separated by newline characters (char code 10), each event is represented as a standard json object string. The variables extracted from the router are printed to the standard output when they are updated, each output line contains a json object describing the change.
+
+## Arguments
 
 ```
 --debug             Prints execution logs to the standard error pipe (stderr)
@@ -19,31 +19,26 @@ Here are the list of arguments that can be used to alter the behaviour of this p
 --skip-start        Disables printing of all variables at start up
 --only-start        Prints all variables and exit the program
 --slow              Prints updates lazily and slows down when there are few updates
---no-date           Removes the date string in local time from the output
---time              Adds the time number of the updated variable
---type              Adds the update type ('created', 'updated', 'removed') to the output
---previous          Adds the previous value of the variable to the output
---json              Changes the output format to JSON object lines separated by new lines
+--no-date           Removes the extracted "date" string property from update entries.
+--time              Adds the "time" property to update entries with the number of milliseconds since the epoch from the extracted date.
+--type              Adds the "type" property with the update type ('created', 'updated', 'removed') to the output
+--previous          Adds the "previous" property to entries with the value that was replaced from the variable
+--text              Changes the output format from JSON objects to key-values (still separated by lines)
 --session-id <id>   Specifies a session id to use while connecting to the router
---exclude <keys>    Excludes one or more variables from the outputprefixes
---include <keys>    Excludes all variables not specified from the output
-           -> [keys] are prefixes of variable keys separated by comma, cas insensitive
---write <file>      Writes the program output (except logs) to a specified file by its path
---write <folder>    Creates a file named with the current date at the specified folder and writes the output to it
---append <file>     Append the output to the end of a file, adding to it without rewriting it
+--exclude <prefix>  Excludes one or more variables from the output by their starting text, case insensitive
+--include <prefix>  Excludes all variables not specified from the output by their starting text, case insensitive
+--save <file>       Writes the program output (except logs) to a specified file by its path
+--save <folder>     Creates a file named with the current date at the specified folder and writes the output to it
+--append <file>     Append the output of the program to the end of a file, adding to it without rewriting it
 ```
 
-## Configuration
+## Environment Configuration
 
-The program can be configured by creating an `.env` file on the project root or by setting environment variables.
+The program has some fixed variables that can be configured by creating an `.env` file on the project root or by setting environment variables.
 
 The `ROUTER_USERNAME` and `ROUTER_PASSWORD` variables are used to login on the router and are required.
 The `ROUTER_HOST` variable can be used to change the router host from the default (192.168.15.1).
-The `ROUTER_HISTORY_CSV_FILE_PATH` variable can be defined so that the program appends process data to a file.
-
-## Output
-
-The internal router variables are printed one per line: Each line printed to the standard output starts with the variable name and an equal character (=) followed by the content of the variable in raw text. The program executes continuously, printing variables when they update.
+The `ROUTER_HISTORY_CSV_FILE_PATH` variable is used to append process spawn event data to a file every time the script starts executing.
 
 ## Dependencies
 
