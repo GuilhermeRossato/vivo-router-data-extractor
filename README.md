@@ -6,6 +6,8 @@ A program that connects to a network router interface, extracts and parses its i
 node index.js [...args]
 ```
 
+![Execution demo](./images/demo.gif)
+
 The program starts by extracting, parsing, and printing the current router state with all internal variables and their values. After this initial stage the program starts watching for updates and prints variables only when they are changed.
 
 The output is a series of events separated by newline characters (char code 10), each event is represented as a standard json object string. The variables extracted from the router are printed to the standard output when they are updated, each output line contains a json object describing the change.
