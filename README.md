@@ -12,16 +12,17 @@ The program starts by extracting, parsing, and printing the current router state
 
 The output is a series of events separated by newline characters (char code 10), each event is represented as a standard json object string. The variables extracted from the router are printed to the standard output when they are updated, each output line contains a json object describing the change.
 
+The extraction has two fetching stages: Status, for variables, and Statistics, for usage and host list.
 ## Arguments
 
 ```
 --debug             Prints execution logs to the standard error pipe (stderr)
 --only-status       Only extract status variables, disabling statistics
 --only-statistics   Only extract statistics variables, disabling status
---skip-start        Disables printing of all variables at start up
+--skip-start        Disables the initial printing of all variables at start up
 --only-start        Prints all variables and exit the program
---slow              Prints updates lazily and slows down when there are few updates
---no-date           Removes the extracted "date" string property from update entries.
+--slow              Delay the output and printing of updates to produce a constant output stream.
+--no-date           Removes the extracted date string property from update entries.
 --time              Adds the "time" property to update entries with the number of milliseconds since the epoch from the extracted date.
 --type              Adds the "type" property with the update type ('created', 'updated', 'removed') to the output
 --previous          Adds the "previous" property to entries with the value that was replaced from the variable
@@ -31,12 +32,12 @@ The output is a series of events separated by newline characters (char code 10),
 --include <prefix>  Excludes all variables not specified from the output by their starting text, case insensitive
 --save <file>       Writes the program output (except logs) to a specified file by its path
 --save <folder>     Creates a file named with the current date at the specified folder and writes the output to it
---append <file>     Append the output of the program to the end of a file, adding to it without rewriting it
+--append <file>     Append the output of the program to the end of a file, adding text to it
 ```
 
 ## Environment Configuration
 
-The program has some fixed variables that can be configured by creating an `.env` file on the project root or by setting environment variables.
+The program has some fixed variables that can be configured by using an `.env` file on the project root or by setting environment variables.
 
 The `ROUTER_USERNAME` and `ROUTER_PASSWORD` variables are used to login on the router and are required.
 The `ROUTER_HOST` variable can be used to change the router host from the default (192.168.15.1).
