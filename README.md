@@ -37,7 +37,9 @@ Here are the list of arguments that can be used to alter the behaviour of this p
 
 The program can be configured by creating an `.env` file on the project root or by setting environment variables.
 
-It uses the `ROUTER_USERNAME` and `ROUTER_PASSWORD` to load credentials and optionally `ROUTER_HOST` to set the router host which by default is 192.168.15.1.
+The `ROUTER_USERNAME` and `ROUTER_PASSWORD` variables are used to login on the router and are required.
+The `ROUTER_HOST` variable can be used to change the router host from the default (192.168.15.1).
+The `ROUTER_HISTORY_CSV_FILE_PATH` variable can be defined so that the program appends process data to a file.
 
 ## Output
 

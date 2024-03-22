@@ -13,9 +13,11 @@ const augmentStateWithPreviousStateRecord = require('./lib/3-parse/augmentStateW
 const sleep = require('./lib/9-utils/sleep.js');
 const startExtractionLoop = require('./lib/4-loop/startExtractionLoop.js');
 const { isOnlyStatistics, isOnlyStatus, sessionArgIndex, isOnlyStart } = require('./lib/0-primitive/args.js');
+const logProcessSpawn = require('./lib/9-utils/logProcessSpawn.js');
 
 (async function init() {
     console.log('Started init function');
+    await logProcessSpawn();
     let sessionId = await login(sessionArgIndex ? process.argv[sessionArgIndex] : undefined);
     console.log('Login sucessfull with session:', sessionId);
     const previousFetchTime = generatePreviousFetchTime(new Date().getTime() + 50);
