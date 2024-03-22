@@ -1,6 +1,6 @@
 {
   "name": "vivo-router-data-extractor",
-  "version": "0.1.0",
+  "version": "0.5.0",
   "description": "A project to extract, digest, save, and visualize data from a Vivo Box network router",
   "main": "index.js",
   "scripts": {
