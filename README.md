@@ -33,6 +33,7 @@ The extraction has two fetching stages: Status, for variables, and Statistics, f
 --save <file>       Writes the program output (except logs) to a specified file by its path
 --save <folder>     Creates a file named with the current date at the specified folder and writes the output to it
 --append <file>     Append the output of the program to the end of a file, adding text to it
+--separate-hosts      Disables the grouping of host variables by MAC address
 ```
 
 ## Environment Configuration
