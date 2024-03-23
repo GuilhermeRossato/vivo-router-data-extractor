@@ -37,11 +37,12 @@ The extraction has two fetching stages: Status, for variables, and Statistics, f
 
 ## Environment Configuration
 
-The program has some fixed variables that can be configured by using an `.env` file on the project root or by setting environment variables.
+This program loads some environment variables, it will also load them from the `.env` file if it exists on the project root.
 
-The `ROUTER_USERNAME` and `ROUTER_PASSWORD` variables are used to login on the router and are required.
-The `ROUTER_HOST` variable can be used to change the router host from the default (192.168.15.1).
-The `ROUTER_HISTORY_CSV_FILE_PATH` variable is used to append process spawn event data to a file every time the script starts executing.
+ - `ROUTER_USERNAME` and `ROUTER_PASSWORD` are used to login on the router if a session id is not provided by argument or by .
+ - `ROUTER_HOST` variable can be used to change the router host from the default value of "http://192.168.15.1" to another target.
+ - `ROUTER_HISTORY_CSV_FILE_PATH` variable can be defined to log every time the program starts (begins execution), appending the date, pid,ppid, working directory and program arguments to the target file in comma-separated format (CSV).
+ - `ROUTER_SESSION_ID_FILE_PATH` variable can be defined to allow the program to persist the latest session id. It saves when it is updated and loads on startup, greatly improving load time. This can be replaced by specifying a `--session` argument followed by the session id.
 
 ## Dependencies
 
